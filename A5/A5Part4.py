@@ -81,7 +81,11 @@ def selectFlatPhasePeak(pX, p, phaseDevThres):
             selectFlag (Boolean) = True, if the peak at index p is a mainlobe, False otherwise
     """
     #Your code here
-    
+    #compute standard deviation of 5 samples
+    samples = pX[(p-2):(p+3)]
+    if np.std([ samples]) < phaseDevThres:
+        return True
+    return False
 
 ### Go through the code below and understand it, but do not modify anything ###
 def sineModelAnalEnhanced(inputFile= '../../sounds/sines-440-602-transient.wav'):
@@ -140,7 +144,7 @@ def sineModelAnalEnhanced(inputFile= '../../sounds/sines-440-602-transient.wav')
     binFreq = fs*np.arange(N*maxplotfreq/fs)/N
     numFrames = int(mX[:,0].size)
     frmTime = H*np.arange(numFrames)/float(fs) 
-    plt.pcolormesh(frmTime, binFreq, np.transpose(mX[:,:N*maxplotfreq/fs+1]), cmap='hot_r')
+    plt.pcolormesh(frmTime, binFreq, np.transpose(mX[:,:int(N*maxplotfreq/fs+1)]), cmap='hot_r')
     plt.plot(tStamps,tfreq[:,0], color = 'y', linewidth=2.0)
     plt.plot(tStamps,tfreq[:,1], color = 'c', linewidth=2.0)
     plt.legend(('Estimated f1', 'Estimated f2'))

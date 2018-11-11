@@ -2,7 +2,8 @@ import numpy as np
 from scipy.signal import get_window
 import math
 import sys, os
-sys.path.append(os.path.join(os.path.dirname(os.path.realpath(__file__)), '../../software/models/'))
+sys.path.append('../../software/models/')
+#sys.path.append(os.path.join(os.path.dirname(os.path.realpath(__file__)), '../../software/models/'))
 import dftModel as DFT
 import utilFunctions as UF
 
@@ -46,6 +47,7 @@ values are M = 1101, N = 2048, fEst = 1000.02 and the freqency estimation error 
 Test case 3: If you run your code with inputFile = '../../sounds/sine-200.wav', f = 200.0 Hz, the optimal
 values are M = 1201, N = 2048, fEst = 200.038 and the freqency estimation error is 0.038.
 """
+
 def minFreqEstErr(inputFile, f):
     """
     Inputs:
@@ -56,8 +58,30 @@ def minFreqEstErr(inputFile, f):
             M (int) = Window size
             N (int) = FFT size
     """
-    # analysis parameters:
+
+    t=-40
+    window = 'blackman' 
+
+    ### Your code here
+    fs, x = UF.wavread(inputFile)
+    center = 0.5 * x.size
     window = 'blackman'
     t = -40
-    
-    ### Your code here
+    estimationError = 1000
+    iterM = 1
+
+    while estimationError > 0.05:
+        M = iterM * 100 +1
+        fragment = x[int(center-M/2) : int(center+M/2+1)]
+        w = get_window(window, M, False)
+        N = int(np.power(2,np.ceil(np.log2(M)))) #nearest N
+
+        mX, pX = DFT.dftAnal(fragment,w, N)
+        ploc = UF.peakDetection(mX, t)
+        iploc, ipmag, ipphase = UF.peakInterp(mX, pX, ploc) 
+        locBinToHz = iploc[0] * fs / N
+        estimationError = np.abs(f-locBinToHz)
+        iterM = iterM + 1
+
+    return locBinToHz, int(M), int(N)
+

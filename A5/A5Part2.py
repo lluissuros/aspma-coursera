@@ -1,7 +1,8 @@
 import numpy as np
 from scipy.signal import get_window
 import sys, os
-sys.path.append(os.path.join(os.path.dirname(os.path.realpath(__file__)), '../../software/models/'))
+sys.path.append('../../software/models/')
+#sys.path.append(os.path.join(os.path.dirname(os.path.realpath(__file__)), '../../software/models/'))
 import stft
 import utilFunctions as UF
 import sineModel as SM
@@ -62,10 +63,10 @@ def chirpTracker(inputFile='../../sounds/chirp-150-190-linear.wav'):
            K is the number of frames
     """
     # Analysis parameters: Modify values of the parameters marked XX
-    M = XX                                # Window size in samples
+    M = 4615                               # Window size in samples
     
     ### Go through the code below and understand it, do not modify anything ###    
-    H = 128                                     # Hop size in samples
+    H = 128                                    # Hop size in samples
     N = int(pow(2, np.ceil(np.log2(M))))        # FFT Size, power of 2 larger than M
     t = -80.0                                   # threshold
     window = 'blackman'                         # Window type
