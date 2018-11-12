@@ -4,8 +4,8 @@ import numpy as np
 import math
 from scipy.signal import get_window
 import matplotlib.pyplot as plt
-
-sys.path.append(os.path.join(os.path.dirname(os.path.realpath(__file__)), '../../software/models/'))
+sys.path.append('../../software/models/')
+#sys.path.append(os.path.join(os.path.dirname(os.path.realpath(__file__)), '../../software/models/'))
 import utilFunctions as UF
 import harmonicModel as HM
 import stft
@@ -101,19 +101,56 @@ def segmentStableNotesRegions(inputFile = '../../sounds/sax-phrase-short.wav', s
     ### your code here
 
     # 1. convert f0 values from Hz to Cents (as described in pdf document)
+    def hertzToCents(f):
+        cents = 1200 * np.log2(f/55.0)
+        return cents
+    
+    f0inCents = hertzToCents(f0)
+    indxs = np.where(f0inCents == -np.inf)[0]
+    f0inCents[indxs] = -9999   # avoids -infs
+
 
     #2. create an array containing standard deviation of last winStable samples
+    stdevs = np.array([])
+    for i in range (f0inCents.size):
+        stdevs = np.append(stdevs, np.std(f0inCents[i-2:i+1]))
+        
 
     #3. apply threshold on standard deviation values to find indexes of the stable points in melody
+    lessThanThsldIndexs = np.where(stdevs<stdThsld)[0]
+
 
     #4. create segments of continuous stable points such that consecutive stable points belong to same segment
-    
+    stables = []
+    currentSegment = np.zeros(2)
+
+    for i in lessThanThsldIndexs:
+        if currentSegment[0] == 0:
+            currentSegment[0] = i
+            currentSegment[1] = i
+            continue
+
+        if i == (currentSegment[1] + 1):
+            currentSegment[1] = i
+            continue
+        
+        stables.append(currentSegment) # I use python array here
+        currentSegment = np.zeros(2)
+
+
+
     #5. apply segment filtering, i.e. remove segments with are < minNoteDur in length
-    
-    # plotSpectogramF0Segments(x, fs, w, N, H, f0, segments)  # Plot spectrogram and F0 if needed
+    filteredSegments = []
+    for s in stables:
+        if( (s[1]-s[0]) * H / float(fs) > minNoteDur):
+            filteredSegments.append(s)
+
+    segments = np.array(filteredSegments)
+
+    plotSpectogramF0Segments(x, fs, w, N, H, f0, segments)  # Plot spectrogram and F0 if needed
 
     # return segments
-
+    return segments
 
 def plotSpectogramF0Segments(x, fs, w, N, H, f0, segments):
     """

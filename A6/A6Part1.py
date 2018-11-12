@@ -4,8 +4,8 @@ import numpy as np
 import math
 from scipy.signal import get_window
 import matplotlib.pyplot as plt
-
-sys.path.append(os.path.join(os.path.dirname(os.path.realpath(__file__)), '../../software/models/'))
+sys.path.append('../../software/models/')
+#sys.path.append(os.path.join(os.path.dirname(os.path.realpath(__file__)), '../../software/models/'))
 import utilFunctions as UF
 import harmonicModel as HM
 import sineModel as SM
@@ -67,13 +67,13 @@ def estimateF0(inputFile = '../../sounds/cello-double-2.wav'):
     """
 
     ### Change these analysis parameter values marked as XX
-    window = XX
-    M = XX
-    N = XX
-    f0et = XX
-    t = XX
-    minf0 = XX
-    maxf0 = XX
+    window = 'blackman'
+    M = 4001
+    N = 4096
+    f0et = 11
+    t = -80
+    minf0 = 130
+    maxf0 = 210
 
     ### Do not modify the code below 
     H = 256                                                     #fix hop size
