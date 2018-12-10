@@ -1,1 +1,1 @@
-This is an empty directory for you to work from.
+For learning pourpose and for me remembering in the future
