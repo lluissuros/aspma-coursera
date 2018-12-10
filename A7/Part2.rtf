@@ -1,0 +1,78 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1671
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fswiss\fcharset0 Arial-BoldMT;\f2\fnil\fcharset0 HelveticaNeue;
+}
+{\colortbl;\red255\green255\blue255;\red35\green93\blue189;\red255\green255\blue255;\red21\green61\blue107;
+\red27\green31\blue34;}
+{\*\expandedcolortbl;;\cssrgb\c17255\c45490\c78824;\cssrgb\c100000\c100000\c100000;\cssrgb\c9804\c31373\c49412;
+\cssrgb\c14118\c16078\c18039;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww8320\viewh14580\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs42 \cf0 Part 2.1
+\fs24 \
+\
+\pard\pardeftab720\sl420\partightenfactor0
+{\field{\*\fldinst{HYPERLINK "https://freesound.org/people/philsapphire/sounds/255812/#"}}{\fldrslt 
+\f1\b\fs36 \cf2 \cb3 \expnd0\expndtw0\kerning0
+Lead guitar with distortion}}
+\f1\b\fs36 \cf4 \cb3 \expnd0\expndtw0\kerning0
+\ul \ulc4 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\b0\fs24 \cf0 \cb1 \kerning1\expnd0\expndtw0 \ulnone https://freesound.org/people/pitx/sounds/16400/\
+
+\f1\b\fs36 \cf4 \cb3 \expnd0\expndtw0\kerning0
+\ul \
+
+\f0\b0\fs24 \cf0 \cb1 \kerning1\expnd0\expndtw0 \ulnone I choose that sound because I am interested in trying the models with a distorted electric guitar. It is an instrument that we still haven\'92t used in the examples of the course. I think it can be more challenging than acoustic instruments, because there are many partials that are introduced by the distortion effect, so I don\'92t know how well it will translate to the harmonic model. The sound also have some reverb which can be problematic as well. It will probably contain much more residual/stochastic part.\
+\
+\
+\
+\
+
+\fs42 Part 2.2Part
+\fs24 \
+\
+When the guitar is palm-muted, it creates a lower sound, and more noisy. When it has clear pitch, we see that the harmonics go all the way up until 18kHz. I can see that the minimum fundamental could be around 90Hz, while the maximum fundamental could be around 200Hz, although the more defined pitches are between 120-200. Therefore, there could be a maximum of around 150 harmonics (by 18000 / f0), but probably many of them are hard to hear.\
+\
+\
+\
+
+\fs44 Part 2.3
+\fs24 \
+\
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f2\fs32 \cf5 \cb3 \expnd0\expndtw0\kerning0
+* window type: blackman\
+Blackman has 6 bins main lobe and smaller side lobes, which proves to be adequate to detect the f0 and the harmonics well.\
+\
+* window size: 3001\
+I used this size, because I experimentally checked that it was more accurate when recognizing fundamental and harmonics than smaller sizes, and there are not very fast frequency changes .\
+
+\f0\fs24 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardeftab720\pardirnatural\partightenfactor0
+\cf0 * FFT Size:  4096\
+This was a size that gave enough resolution, and it\'92s the next power of 2 of the window size.\
+\
+\
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f2\fs32 \cf5 \cb3 \expnd0\expndtw0\kerning0
+* minimum f0: 120\
+  I could see in the spectrogram that minimum f0 was 120Hz or more. Lower frequencies only confused f0 detection. \
+\
+* maximum f0: 220\
+  I could see in the spectrogram that maximum f0 was less than 220Hz. Higher frequencies could co nfuse f0 detection with the second harmonics\
+
+\f0\fs24 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+
+\f2\fs32 \cf5 \cb3 \expnd0\expndtw0\kerning0
+* error threshold in f0 detection: 4\
+  Smaller thresholds will start to not recognise properly the fundamental and make artifacts\
+\
+* maximum number harmonics: 40\
+  I started on 120 harmonics, and went down experimentally until 40, because I think this offers a got compression ratio without compromising the output so much.\
+\
+* stochastic decimation factor: 0.6\
+  We achieve a good rate of compression, but lower factors will start to have a big impact, specially on the lower frequencies which are important on the palm-muted sound.}

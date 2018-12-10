@@ -1,0 +1,36 @@
+
+I will give the Freesounds id of each sample in order to make it easy to identify
+
+
+
+
+*Trumpet(id: 81822):
+I want to see if it correctly classifies trumpet, so I take this new sound, which is a trumpet, but with reverb and FX, and filtered.
+It classified as Cello!
+So this didn't work. My guess is that the centroid of this sound is also pretty low, so it will classify as Cello. Maybe I should include more diverse samples in my training data, in order to make it more robust...
+
+
+*Crash(id:344266): 
+I use this sound of broken glass, which to me it should be classified as naobo, because it is much more similar(it is high frequency, has attach, is more inharmonic)
+I gets classified as naobo!
+
+
+*Cello bow(id:68452)
+Actually, this is the sound of two bow string(or two string in a single instrument), could be cello, or could be viola or even violin.
+I correctly classifies to Cello!
+The model correctly classifies it. I thnk there were some training examples with very similar timbre and pitch to this test sample
+
+
+*Drum Ride(id: 41941)
+This is a ride cymbal from a drumset. I should be classified as naomo, as it is high and percussive.
+It classifies correctly as Naomo!
+In this case, the spectral centroid and the attack (descriptor [0,3], k=3) work well in making a good model. 
+ 
+
+
+* Guitar (id: 91199):
+First I want to try guitar, so I take 1 sounds from Freesounds. After some trial and error with the search, I get a correct guitar sound.
+Later I classify the sound, according to the successful model I got in the previous task (descriptors [0,3], and k=3).
+The guitar is classified as Cello! This could be, maybe because the spectral centroid is lower than trumpet and naobo. I was not sure if it were to classify as cello (because of spectral centroid) or naobo (because it has strong attack).
+ 
+I will also try now, adding all the mfcc descriptors (descriptors [0,3,11,12,13,14,15,16], and k=3), and it is also classified as 'Cello'. I think it is because overall, the sound is more similar to Cello than the other (trumpet and naobo)

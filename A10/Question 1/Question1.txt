@@ -1,0 +1,127 @@
+Question 1
+
+
+First, I made sure to change the quality to high-q mp3, as explained in the assignments file.
+
+
+I used the 3 choices from A9 (trumpet, naobo, cello), so like this I can compare this exprience with the current exercise, and I add 7 more (clarinet, xiaoluo, flute, violin, bassoon, snare drum, mridangam)
+  Sadly it was impossible for me to get a good query for  guitar, as I couldn't filter out many examples that had similar tags but were quite different sounds, or that were not single notes.
+
+
+
+
+
+
+
+All the API request followed the pattern of the example below, so from now on I will only specify the relevant parameters for the sake of readability:
+
+SD.downloadSoundsFreesound(queryText='mridangam',tag='mridangam-stroke-dataset', API_Key='s9xV21k899aPetFLLLj7IQjq2hCprXG0IqymUEy1', outputDir='testDownload/', topNResults=20, duration=(0,3))
+
+
+
+
+Below I will briefly describe all the 10 choosen instruments:
+
+
+
+
+* Naobo:
+In this case, the plain search in Freesounds website was already returning 20 single note instruments for less than 10 seconds, so there was no need to specify tag. All results obtained are correct.
+
+query-text='naobo'
+duration=(0,10)
+
+
+
+
+* Trumpet:
+On trumpet, the plain search gave a lot of not “correct” results, so I had to refine the search a bit. I used “trumpet single-note” and check on “tag”, set the duration to maximum 3 seconds (to not allow longer durations, which might introduce melodies), and I got 20 correct results on the website. Actually I’m quite happy because all sounds are from different pitches, so I quite representative as a start.
+
+queryText='trumpet'
+tag='single-note'
+duration=(0,3)
+
+
+
+
+*Cello:
+I used the same approach that for the trumpet, and Freesound web gave me good results as well. They are all related to the same MTG collection, which to me it is good, they are well recorded and with different pitches. It is interesting to have string+arch sound. 
+
+queryText='cello'
+tag='single-note'
+duration=(0,3)
+
+
+
+
+* Xiaoluo:
+I though it would be interesting to have a high percusive sound, I am curious to see if it interferes with the naobo classification.
+ In this case, just limiting the duration to 10 seconds was enough to get good samples.
+
+query-text='xiaoluo'
+duration=(0,10)
+
+
+
+
+* Clarinet: 
+I think it is quite a different timbre than trumpet for a wind sound used the tag 'good-sounds' for clarinet to get good samples, otherwise it was hard to not let other sounds (like Casio sounds) to sneak in the search.
+
+query-text='clarinet'
+tag='good-sounds'
+duration=(0,10)
+
+
+
+
+* Flute:
+I will be using the good-sounds collections as well fro the flute. Can be interesting to see how well we can separate it from clarinet.
+
+query-text='flute'
+tag='good-sounds'
+duration=(0,3)
+
+
+
+
+
+* Violin:
+I set the duration to maximum 3 seconds, and I can get a nice collection of sounds from the MTG. I add single-note for extra precaution with the API.
+
+query-text='violin'
+tag='single-note'
+duration=(0,3)
+
+
+
+
+
+* Bassoon:
+I found that it works well with the tag 'single-note'
+
+query-text='bassoon'
+tag='single-note'
+duration=(0,3)
+
+
+
+
+* Snare Drum: 
+This was for me the most difficult query to get right. There are a lot of sounds in Freesounds that appear in the search but they actually don't sound like a snare. At the end I found that the tag 'sample' works pretty well, and there are only a couple of very synthetic sounds, but they still could be used as a snare-drum, so I'm keeping it. I realise that the snare is a very versatile sound, as many sources can sound have the role of snare in music.
+
+query-text='snare-drum'
+tag='sample'
+duration=(0,2)
+
+
+
+
+* Mridangam: 
+I am a little affraid of how the clustering will result, specially mixed with the snare-drum, but there are not many other options left... In any case, I found that this 'mridangam-stroke-dataset' collection could be useful so I specified it in the tag, as well as reducingthe duration to avoid long beats.
+
+query-text='mridangam'
+tag='mridangam-stroke-dataset'
+duration=(0,3)
+
+
+

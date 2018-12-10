@@ -1,0 +1,26 @@
+TASK 1
+I will choose naobo, trumpet and cello, because it seems to me that they are quite different instruments, so it should be possible to obtain a quite accurate classification afterwards. At the same time, being different instruments, I can check how the API is performing related to each group (percussion, wind and string).
+
+
+
+
+* Naobo:
+In this case, the plain search in Freesounds website was already returning 20 single note instruments, so there was no need to specify tag. All results obtained are correct.
+
+downloadSoundsFreesound(queryText='naobo', API_Key='s9xV21k899aPetFLLLj7IQjq2hCprXG0IqymUEy1', outputDir='testDownload/', topNResults=20, duration=(0,10))
+
+
+
+* Trumpet:
+On trumpet, the plain search gave a lot of not “correct” results, so I had to refine the search a bit. I used “trumpet single-note” and check on “tag”, set the duration to maximum 3 seconds (to not allow longer durations, which might introduce melodies), and I got 20 correct results on the website. Actually I’m quite happy because all sounds are from different pitches, so I quite representative as a start.
+ Therefore I write the API call like this:
+
+downloadSoundsFreesound(queryText='trumpet', API_Key='s9xV21k899aPetFLLLj7IQjq2hCprXG0IqymUEy1', outputDir='testDownload/', topNResults=20, duration=(0,3), tag='single-note')
+
+
+
+*Cello:
+I used the same approach that for the trumpet, and Freesound web gave me good results as well. They are all related to the same MTG collection, which to me it is good, they are well recorded and with different pitches.
+
+downloadSoundsFreesound(queryText='cello', API_Key='s9xV21k899aPetFLLLj7IQjq2hCprXG0IqymUEy1', outputDir='testDownload/', topNResults=20, duration=(0,3), tag='single-note')
+

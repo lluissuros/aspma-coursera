@@ -1,0 +1,55 @@
+For brevity reasons I will refer to the descriptors as numbers, following the provided table:
+
+0 lowlevel.spectral centroid.mean
+1 lowlevel.dissonance.mean
+2 lowlevel.hfc.mean
+3 sfx.logattacktime.mean
+4 sfx.inharmonicity.mean
+5 lowlevel.spectral contrast.mean.0
+6 lowlevel.spectral contrast.mean.1
+7 lowlevel.spectral contrast.mean.2
+8 lowlevel.spectral contrast.mean.3
+9 lowlevel.spectral contrast.mean.4
+10 lowlevel.spectral contrast.mean.5
+11 lowlevel.mfcc.mean.0
+12 lowlevel.mfcc.mean.1
+13 lowlevel.mfcc.mean.2
+14 lowlevel.mfcc.mean.3
+15 lowlevel.mfcc.mean.4
+16 lowlevel.mfcc.mean.5
+
+
+
+I start just by using the successful descriptors that I liked in Task 2:
+
+SA.clusterSounds('testDownload/', 3, [0,3])
+
+This actually provides 100% accuracy over the training data. 
+This satisfies me quite a lot, because I think it is quite hard to have overfitting, since we don't use many descriptors (thus probably we have a quite general classification), and actually the descriptors make a lot of sense to me: Classifier 0 separates cello, which is lower frequency than the others, and classifier 3 separates naobo, which have different attack properties.
+ 
+ 
+  The thing that concerns me the most, is that maybe the training data is not diverse enough, because specially in the trumpet and cello, all the recoding belong to the same collection, therefore probably it will be the same microphone, instrument and musician.
+
+
+
+
+
+Anyway, for the sake of the exercise, I will try different configurations:
+
+* Try all descriptors:
+ => This also gives 100% accuracy, which to me it makes sense since the instruments are quite different. Although it looks like too much overkill, and also like this it is very hard to interpret how the clustering is happening.
+
+SA.clusterSounds('testDownload/', 3, [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16])
+
+
+
+
+* Try only all MFCC descriptors:
+I think this should work well also, because it will perform a clustering based on spectral features, which are different between the instruments.
+Actually, this gives 2 false trumpets categorized as naobo (id: '247317','369912'). This 2 sounds are indeed different spectrally speaking, more high and noisy and with less defined pitch, so maybe this is why they were classified as naobo.
+
+SA.clusterSounds('testDownload/', 3, [11,12,13,14,15,16])
+
+ 
+
+

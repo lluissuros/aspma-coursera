@@ -1,0 +1,33 @@
+Question 2
+
+I am using a distorted guitar sound that I already used in A7Part2, even though modelling harmonically the distorted guitar is challenging, I want to see what happens...
+
+
+These are the used parameters for analysis:
+* window type: blackman
+* window size: 3001
+* FFT Size:  4096
+* minimum f0: 120
+* maximum f0: 220
+* error threshold in f0 detection: 5
+* maximum number harmonics: 100
+* stochastic decimation factor: 0.1
+
+
+
+Example 1:
+First, I will use frequency scaling to create a kind of note bending(up) in the middle, and another  bending(down) in the end of the sound.
+Then, I will drastically stretch the frequency (something that I couldn't use in the "natural" exercise because it sound very synthetic, like an antennae)
+Finally, I will reverse the audio by using the time scaling on.
+
+My idea was to try to create an outer-space sci-fi sound, where we receive like an alien guitar solo :)
+
+
+freq Scaling:
+[0,1,  1,1,  1.1,2, 1.5,1,  2.6,1,  3.5,1, 4.5, 2]
+
+freq Streching: 
+[0, 2, 1,1,  2,1,  2.5, 2, 3, 1, 4, 1]
+
+time Scaling: 
+[0, 1, 1, 0]

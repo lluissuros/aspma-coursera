@@ -1,0 +1,55 @@
+I paste here the descriptors, so I can refer to them by their number for the sake of brevity:
+
+0 lowlevel.spectral centroid.mean
+1 lowlevel.dissonance.mean
+2 lowlevel.hfc.mean
+3 sfx.logattacktime.mean
+4 sfx.inharmonicity.mean
+5 lowlevel.spectral contrast.mean.0
+6 lowlevel.spectral contrast.mean.1
+7 lowlevel.spectral contrast.mean.2
+8 lowlevel.spectral contrast.mean.3
+9 lowlevel.spectral contrast.mean.4
+10 lowlevel.spectral contrast.mean.5
+11 lowlevel.mfcc.mean.0
+12 lowlevel.mfcc.mean.1
+13 lowlevel.mfcc.mean.2
+14 lowlevel.mfcc.mean.3
+15 lowlevel.mfcc.mean.4
+16 lowlevel.mfcc.mean.5
+
+
+The descriptors that work really well in A9, 0 and 3, are no longer clustering everything together, as it was expected. But for example they are able to separate mridangam very well, probably because it is a sound with a very sharp attack, and a high centroid.
+ I can see with these descriptors, that also naobo and xiaoluo are very mixed up ( it seems natural to me since they are also quite similar), but with descriptor 5 it is possible to separate them nicely.
+
+My strategy at the beginning was sticking with descriptor 3, and compare the effect of the others. like this I feel I can understand better what is the effect of each descriptor, and what enhancement is providing if any.
+ 
+
+I can see that the lowlevel contrast mean can be useful to separate also. For example, 9 is useful for separating the violin from the others, and 10 also separates naobo+xiaoluo. This makes sense, as these are higher frequency instruments, and probably they have more activity and harmonics in the upper side of the spectrum.
+
+The descriptor 12 proves to be useful for classifying bassoon from flute, which until this moment were always mixed up. Mfcc are useful when separating single sources, and I plan on using them all, maybe except 11 which is mainly indicating loudness.
+
+
+
+
+
+Final classification:
+
+
+*I start with all the descriptors, except 11. The reason is that I want to see how the system performs with all of them, and then trying to fine tune the results based on the plots I saw before:
+ The results are on average about 73%
+
+
+* I removed some descriptors that I didn't see they bring anything special, which were 1,2,6,7, and the mean performance was about 75% (min:70% and max: 82%).
+ Later I removed descriptor 4 and 8. Because I didn't think they were providing any improvement, and the classification improve up to mean 79%.
+
+I can see that the system changes on each execution, but the main problems come in differentiating violin-cello, or bassoon-clarinet-flute. This makes sense as they are quite similar and even a human may have problems discriminating certain sounds of these groups.
+ In general, the clarinet is having a lot of trouble when being classified, most of the runs it doesn't have a group on its own, so I checked the sounds again, and many samples have two pitches instead of one, which might be cause for confusion. I leave this to the final question, to see if there is possible to improve this classification. 
+  Actually, with the clarinet being totally misclassified, I loose a 10% of accuracy in every run, so I am curious if I can make use of some improvements to solve the question. Also some snare-drum sounds are always misclassified, but since they are quite different, it is not surprising.
+
+
+BEST (mean) execution ---> my baseline:
+SA.clusterSounds('testDownload/', 10, [0,3,5,9,12,13,14,15,16])    
+===> mean of 79%
+
+

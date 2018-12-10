@@ -1,0 +1,35 @@
+For brevity reasons I will refer to the descriptors as numbers, following the provided table:
+
+0 lowlevel.spectral centroid.mean
+1 lowlevel.dissonance.mean
+2 lowlevel.hfc.mean
+3 sfx.logattacktime.mean
+4 sfx.inharmonicity.mean
+5 lowlevel.spectral contrast.mean.0
+6 lowlevel.spectral contrast.mean.1
+7 lowlevel.spectral contrast.mean.2
+8 lowlevel.spectral contrast.mean.3
+9 lowlevel.spectral contrast.mean.4
+10 lowlevel.spectral contrast.mean.5
+11 lowlevel.mfcc.mean.0
+12 lowlevel.mfcc.mean.1
+13 lowlevel.mfcc.mean.2
+14 lowlevel.mfcc.mean.3
+15 lowlevel.mfcc.mean.4
+16 lowlevel.mfcc.mean.5
+
+
+
+First attempt: I started with the provided descriptors in the example, which is 0 an 12. Just by looking at this plot, I can see that 0 works very well on separating Cello (makes sense, since cello is much lower frequency instrument than the other two). 
+At the same time, 12 is also quite good, because these instruments have different timbric properties, but I can see that there is one trumpet sample (369912) which sound very different and will be difficult to classify properly.
+Therefore, I can keep 0 as a rule of separating Cello, and use the other axis to separate well between trumpet and naobo.
+
+
+Second attempt: 
+ Since I need now to classify between trumpet and naobo, because I know I can use 0 to classify Cello out, and since I know that both are high frequency rich, my guess is that the main difference between naobo and trumpet is the attack, so I use 3 (combined with 0).
+ This gives a very good separation! To me it makes a lot of sense, because trumpet and naobo have very different characteristics on the attack. Combined with the spectral centroid, each instrument is separated.
+
+
+With this I am happy enough to go to next question.
+
+

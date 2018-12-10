@@ -1,0 +1,77 @@
+QUESTION 1
+
+
+I am using the following values for the analysis:
+
+* window type: blackman
+Blackman has 6 bins main lobe and smaller side lobes, which proves to be adequate to detect the f0 and the harmonics well.
+
+* window size: 1501
+Higher works well but might be a little worse on attacks.
+
+* FFT Size:  2048
+
+* minimum f0: 120
+  I could see in the spectrogram that minimum f0 was more than 120Hz. The f0 detection is working pretty well
+
+* maximum f0: 260
+  I could see in the spectrogram that maximum f0 was less than 260Hz. The f0 detection is working pretty well
+
+* error threshold in f0 detection: 5
+  Smaller thresholds will start to not recognise properly the fundamental
+
+* maximum number harmonics: 100
+  I think this cover pretty much of the harmonics of the speech
+
+* stochastic decimation factor: 0.1
+ In this case, lower decimation will result in more artifacts in the transformation.
+
+
+some onsets:  0.197, 0.397, 0.607, 1.033, 1.281, 1.690, 1.982, 2.437,  2.757, 3.274, 3.627
+
+
+
+Example 1:
+In this example, I decided to play only with the frequency scaling factors. I noted the onsets of some silabs, and used them to identify possible points for manipulation. Basically I wanted to experiment how could I produce a speech where the speaker is at some points raising an octave. I found out that if I do it for short and limited periods of time, in vowels, it can still sound natural, only changing the intonation of the speaker. If the frequency scaling change is too long, it will sound strange, a little bit artificial or weird. 
+
+I left the frequency stretching untouched because it affects the harmonic structure of the voice, thus making it very strange.
+
+I left time scaling unchanged also to focus on the frequency scaling.
+
+freq Scaling:
+[0, 1, 0.397, 2, 0.607, 1,  1.033, 2, 1.281, 1, 2.437, 1, 2.757,2, 3.274, 1, 3.9, 1]
+
+freq Streching: 
+[0, 1, 1, 1]
+
+time Scaling: 
+[0, 0, 1, 1]
+
+
+
+Example 2:
+In this example, I focused on using time scaling factors. The key in changing duration is to do it in the vowels, because when humans speak slower, they keep the consonants more or less the same, and we tend to stretch the vowels. Thus, I located a vowel and stretched it, while trying to keep the resting sound as equal duration. I left the same freq scaling from exercise 1, but I made the speaker raise the pitch half octave in the streched vowel.
+
+
+freq Scaling:
+[0, 1, 0.397, 2, 0.607, 1,  1.033, 2, 1.281, 1, 1.94, 1, 2, 1.5, 2.437, 1, 2.757,2, 3.274, 1, 3.9, 1]
+
+freq Streching: 
+[0, 1, 1, 1]
+
+time Scaling: 
+[0, 0, 1.94, 1.94, 2, 3,  3.9, 4.9]
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
